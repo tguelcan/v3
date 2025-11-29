@@ -34,7 +34,7 @@
 		</div>
 		<div
 			in:fade={{ duration: 1000, delay: 150 }}
-			class="z-30 pb-3 px-3 md:pb-6 md:px-6 justify-end flex text-base-content/50 text-xs"
+			class="z-30 pb-3 px-3 md:pb-6 md:px-6 justify-end flex text-base-100/70 dark:text-base-content/50 text-xs"
 		>
 			Picture by&nbsp;<a
 				href="https://unsplash.com/de/@cansu_tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"

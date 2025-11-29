@@ -5,7 +5,7 @@
 	import { onNavigate } from '$app/navigation';
 
 	const keys = new PressedKeys();
-	let showMenu = $state<boolean>(true);
+	let showMenu = $state<boolean>(false);
 
 	$effect(() => {
 		if (keys.has('Escape')) {
@@ -23,7 +23,7 @@
 
 <div class="sticky top-0 md:top-2 md:px-3 max-w-4xl mx-auto w-full">
 	<button
-		class="btn btn-primary dark:btn-secondary text-left w-full"
+		class="btn btn-accent text-left w-full"
 		style="--btn-noise: 0"
 		onclick={() => (showMenu = true)}
 	>
@@ -72,8 +72,8 @@
 				</ul>
 			{/await}
 
-			<div class="relative w-full sm:w-1/2 flex flex-col bg-primary">
-				<ul class="menu text-neutral-content w-full z-10">
+			<div class="relative w-full sm:w-1/2 flex flex-col bg-base-200">
+				<ul class="menu w-full z-10">
 					<li>
 						<a href="/settings">
 							<Settings2 size={14} />

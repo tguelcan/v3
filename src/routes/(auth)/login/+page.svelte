@@ -5,7 +5,7 @@
 	import Claim from './Claim.svelte';
 	import Legal from './Legal.svelte';
 
-	const { email, password, name } = authForm.fields;
+	const { email } = authForm.fields;
 </script>
 
 <div class="h-full flex flex-col justify-center items-center">
@@ -19,11 +19,11 @@
 				<p>Jump in and explore the possibilities...</p>
 			</div>
 
-			<div class="my-6 space-y-4">
-				<button class="btn btn-block" disabled
+			<div class="my-6 space-y-4 tooltip tooltip-bottom" data-tip="Coming soon...">
+				<button class="btn btn-block opacity-50" disabled
 					><img src="/img/google.svg" alt="Google Logo" class="inline-block w-5" /> Continue with Google</button
 				>
-				<button class="btn btn-block" disabled>
+				<button class="btn btn-block opacity-50" disabled>
 					<img src="/img/linkedin.svg" alt="LinkedIn Logo" class="inline-block w-4 mr-1" />
 					Continue with LinkedIn</button
 				>

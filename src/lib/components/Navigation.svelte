@@ -5,7 +5,7 @@
 	import { onNavigate } from '$app/navigation';
 
 	const keys = new PressedKeys();
-	let showMenu = $state<boolean>(false);
+	let showMenu = $state<boolean>(true);
 
 	$effect(() => {
 		if (keys.has('Escape')) {
@@ -44,7 +44,6 @@
 		<li class="w-3/4"></li>
 	</ul>
 {/snippet}
-
 <dialog id="navigation" class="modal" class:modal-open={showMenu}>
 	<div class="modal-box p-0 mb-auto sm:mt-9 size-full rounded-none sm:rounded-box sm:h-auto">
 		<div class="flex flex-col sm:flex-row h-full">
@@ -72,8 +71,9 @@
 					{/each}
 				</ul>
 			{/await}
-			<div class="relative w-full sm:w-1/2 flex flex-col justify-end">
-				<ul class="menu bg-base-100/50 dark:bg-secondary/70 backdrop-blur-sm w-full z-10">
+
+			<div class="relative w-full sm:w-1/2 flex flex-col bg-primary">
+				<ul class="menu text-neutral-content w-full z-10">
 					<li>
 						<a href="/settings">
 							<Settings2 size={14} />
@@ -81,9 +81,6 @@
 						>
 					</li>
 				</ul>
-				<div class="hidden sm:block sm:absolute inset-0 -z-10">
-					<img src="/img/hero.svg" alt="hero" class="size-full object-cover" />
-				</div>
 			</div>
 		</div>
 	</div>

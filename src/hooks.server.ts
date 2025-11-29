@@ -1,6 +1,10 @@
 import type { Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { svelteKitHandler } from 'better-auth/svelte-kit';
+import { auth } from '$server/auth';
+import { building } from '$app/environment';
 
-export const handle: Handle = async ({ event, resolve }) => {
+const logHandle: Handle = async ({ event, resolve }) => {
 	const requestTime: number = Date.now();
 	const response = await resolve(event);
 	const responseTime: number = Date.now();
@@ -9,3 +13,26 @@ export const handle: Handle = async ({ event, resolve }) => {
 	);
 	return response;
 };
+
+const authHandle: Handle = ({ event, resolve }) => {
+	return svelteKitHandler({ event, resolve, auth, building });
+};
+
+const mainHandle: Handle = async ({ event, resolve }) => {
+	const response = await resolve(event);
+	console.log(`getSession`);
+	const session = await auth.api.getSession({
+		headers: event.request.headers
+	});
+
+	console.log(session);
+	// Make session and user available on server
+	if (session) {
+		event.locals.session = session.session;
+		event.locals.user = session.user;
+	}
+
+	return response;
+};
+
+export const handle = sequence(logHandle, authHandle, mainHandle);

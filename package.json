@@ -54,6 +54,7 @@
   },
   "type": "module",
   "dependencies": {
+    "better-auth": "^1.4.3",
     "ioredis": "^5.8.2",
     "runed": "^0.36.0"
   }

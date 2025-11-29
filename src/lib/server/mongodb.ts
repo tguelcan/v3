@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { env } from '$env/dynamic/private';
 // Create a new MongoClient
-const client = new MongoClient(env.MONGODB_URI);
+export const client = new MongoClient(env.MONGODB_URI);
 
 // Connect to the database
 export const connect = async (): Promise<MongoClient> => client.connect();

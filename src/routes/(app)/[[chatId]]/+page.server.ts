@@ -19,13 +19,17 @@ import { getSession } from '$remotes/auth.remote';
  * @returns Chat data with messages and metadata, or undefined for new chats
  * @throws Redirects to /login if user is not authenticated
  */
-export const load: PageServerLoad = async ({ params: { chatId } }) => {
+export const load: PageServerLoad = async ({ params: { chatId }, setHeaders }) => {
 	// Authentication check - redirect if not logged in
 	const session = await getSession();
 	if (!session) redirect(302, '/login');
 
 	// New chat: Return early to render empty conversation
 	if (!chatId) return;
+
+	setHeaders({
+		'cache-control': 'no-cache private, max-age=0'
+	});
 
 	// Existing chat: Fetch and return chat history
 	return findChatById(chatId);

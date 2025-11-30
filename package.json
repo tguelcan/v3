@@ -4,7 +4,6 @@
 	"devDependencies": {
 		"@ai-sdk/openai": "^3.0.0-beta.66",
 		"@ai-sdk/svelte": "^3.0.101",
-		"@sveltejs/adapter-cloudflare": "^7.2.4",
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.39.1",
 		"@flydotio/dockerfile": "^0.7.10",
@@ -58,5 +57,7 @@
 		"test": "npm run test:unit -- --run"
 	},
 	"type": "module",
-	"dependencies": {}
+	"dependencies": {
+		"@sveltejs/adapter-node": "^5.4.0"
+	}
 }

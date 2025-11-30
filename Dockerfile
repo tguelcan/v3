@@ -4,6 +4,12 @@
 ARG BUN_VERSION=1.2.14
 FROM oven/bun:${BUN_VERSION}-slim AS base
 
+ARG BETTER_AUTH_SECRET
+ARG MONGODB_URI
+ARG OPENAI_API_KEY
+ARG BASE_URL
+ARG RESEND_API_KEY
+
 LABEL fly_launch_runtime="SvelteKit"
 
 # SvelteKit app lives here
@@ -27,8 +33,8 @@ RUN bun install
 # Copy application code
 COPY . .
 
-# Build application
-RUN bun --bun run build
+RUN BETTER_AUTH_SECRET=$BETTER_AUTH_SECRET MONGODB_URI=$MONGODB_URI OPENAI_API_KEY=$OPENAI_API_KEY BASE_URL=$BASE_URL RESEND_API_KEY=$RESEND_API_KEY bun --bun run build
+
 
 # Remove development dependencies
 RUN rm -rf node_modules && \

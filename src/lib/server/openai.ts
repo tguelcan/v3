@@ -1,8 +1,8 @@
 import { createOpenAI } from '@ai-sdk/openai';
-import { OPENAI_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 const openai = createOpenAI({
-	apiKey: OPENAI_API_KEY
+	apiKey: env.OPENAI_API_KEY
 });
 
 export const mainModel = openai('gpt-5.1');

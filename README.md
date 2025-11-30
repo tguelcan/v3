@@ -94,17 +94,16 @@ Create a `.env` file in the root directory:
 
 ```env
 # Database
-MONGODB_URI=mongodb://localhost:27017/assistant
+MONGODB_URI
 
 # OpenAI
-OPENAI_API_KEY=sk-...
+OPENAI_API_KEY
 
 # Better Auth
-BETTER_AUTH_SECRET=your-secret-key-here
-BETTER_AUTH_URL=http://localhost:5173
+BETTER_AUTH_SECRET
 
 # Resend (for magic link emails)
-RESEND_API_KEY=re_...
+RESEND_API_KEY
 ```
 
 ### 3. Development

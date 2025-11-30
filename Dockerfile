@@ -27,8 +27,6 @@ RUN bun install
 # Copy application code
 COPY . .
 
-RUN TURSO_DB_URL=$TURSO_DB_URL TURSO_DB_AUTH_TOKEN=$TURSO_DB_AUTH_TOKEN pnpm run build
-
 # Build application
 RUN bun --bun run build
 

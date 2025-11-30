@@ -1,5 +1,5 @@
 import { mdsvex } from 'mdsvex';
-import adapter from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -8,10 +8,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex({ extensions: ['.svx', '.md'] })],
 	kit: {
-		adapter: adapter({
-			edge: false,
-			split: false
-		}),
+		adapter: adapter(),
 		alias: {
 			$components: 'src/lib/components/*',
 			$parts: 'src/lib/parts/*',

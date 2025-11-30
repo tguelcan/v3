@@ -21,12 +21,10 @@ const authHandle: Handle = ({ event, resolve }) => {
 const mainHandle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
 
-	console.log(`getSession`);
 	const session = await auth.api.getSession({
 		headers: event.request.headers
 	});
 
-	console.log(session);
 	// Make session and user available on server
 	if (session) {
 		event.locals.session = session.session;

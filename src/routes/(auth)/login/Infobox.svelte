@@ -2,17 +2,17 @@
 	import Claim from './Claim.svelte';
 	import { fade, fly } from 'svelte/transition';
 
-	let show = $state(false);
+	let show = $derived<boolean>(false);
 
 	$effect(() => {
 		show = true;
 	});
 </script>
 
-{#if show}
-	<div
-		class="w-full hidden md:relative md:flex flex-col justify-end bg-primary rounded-box text-base-content overflow-hidden"
-	>
+<div
+	class="w-full hidden md:relative md:flex flex-col justify-end bg-primary rounded-box text-base-content overflow-hidden"
+>
+	{#if show}
 		<div in:fly={{ y: 10, duration: 800 }} class="z-30 px-3 md:px-6">
 			<Claim />
 		</div>
@@ -38,10 +38,11 @@
 		>
 			Picture by&nbsp;<a
 				href="https://unsplash.com/de/@cansu_tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+				class="link no-underline hover:text-white transition-colors"
 				target="_blank">Cansu Sarp</a
 			>
 		</div>
 		<div class="inset-0 absolute z-10"></div>
 		<img in:fade src="/img/bg.svg" alt="background" class="absolute size-full object-cover" />
-	</div>
-{/if}
+	{/if}
+</div>

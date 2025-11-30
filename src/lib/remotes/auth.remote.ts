@@ -1,33 +1,83 @@
-import { form, getRequestEvent } from '$app/server';
+import { redirect } from '@sveltejs/kit';
+import { form, getRequestEvent, query } from '$app/server';
 import { z } from 'zod/v4';
 import { auth } from '$server/auth';
+/**
+ * Auth Remote Module
+ *
+ * Provides server-side authentication utilities for magic link login
+ * and session management. Uses Better Auth for authentication handling.
+ */
 
-export const authForm = form(
-	z.object({
-		email: z.email()
-	}),
-	async ({ email }) => {
-		try {
-			const { request } = await getRequestEvent();
-			console.log('email');
-			console.log(email);
-			console.log(request.headers);
-			const response = await auth.api.signInMagicLink({
-				body: {
-					email
-				},
-				// This endpoint requires session cookies.
-				headers: request.headers
-			});
-			console.log('response');
-			console.log(response);
-			// Redirect to the newly created page
-			//redirect(303, `/`);
-			return { success: true };
-		} catch (error) {
-			console.log('---error');
-			console.error(error);
-			return { success: false };
-		}
+// Validation schema for email-based authentication
+const authSchema = z.object({
+	email: z.email()
+});
+
+/**
+ * Magic Link Authentication Form Handler
+ *
+ * Sends a magic link to the user's email address for passwordless login.
+ *
+ * Flow:
+ * 1. Validates email format via Zod schema
+ * 2. Calls Better Auth API to send magic link
+ * 3. Returns success/failure status
+ *
+ * @param email - User's email address for authentication
+ * @returns Object with success boolean indicating operation result
+ */
+export const authForm = form(authSchema, async ({ email }) => {
+	try {
+		const { request } = getRequestEvent();
+
+		// Send magic link via Better Auth API
+		await auth.api.signInMagicLink({
+			body: {
+				email
+			},
+			// Session cookies are required for this endpoint
+			headers: request.headers
+		});
+
+		// Return object with success true
+		return { success: true };
+	} catch {
+		return { success: false };
 	}
-);
+});
+
+/**
+ * Session Retrieval Query
+ *
+ * Fetches the current user's session from Better Auth.
+ * Disables cookie cache to ensure fresh session data.
+ *
+ * @returns Session object if authenticated, null otherwise
+ */
+export const getSession = query(async () => {
+	const { request } = getRequestEvent();
+
+	// Retrieve session with cache disabled for fresh data
+	const session = await auth.api.getSession({
+		query: {
+			disableCookieCache: true
+		},
+		headers: request.headers // pass the headers
+	});
+	console.log(session);
+	return session;
+});
+
+export const logout = form(async () => {
+	const { request } = getRequestEvent();
+
+	// Retrieve session with cache disabled for fresh data
+	await auth.api.signOut({
+		query: {
+			disableCookieCache: true
+		},
+		headers: request.headers // pass the headers
+	});
+	redirect(302, '/login');
+});

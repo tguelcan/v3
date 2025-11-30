@@ -17,9 +17,6 @@
 
 <div class={className}>
 	{#each message.parts as part, partIndex (partIndex)}
-		<!--
-    <pre>{JSON.stringify(part, null, 2)}</pre>
-    -->
 		<!-- Get values -->
 		{@const role = message.role}
 		{@const state = part.state}

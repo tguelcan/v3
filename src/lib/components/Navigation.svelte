@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PressedKeys } from 'runed';
-	import { EllipsisVertical, BadgePlus, X, Settings2 } from '@lucide/svelte';
+	import { EllipsisVertical, BadgePlus, X, Settings2, User } from '@lucide/svelte';
 	import { getChats } from '$remotes/chat.remote';
 	import { onNavigate } from '$app/navigation';
 
@@ -21,9 +21,9 @@
 	});
 </script>
 
-<div class="sticky top-0 md:top-2 md:px-3 max-w-4xl mx-auto w-full">
+<div class="sticky top-0 sm:top-2 max-w-4xl mx-auto w-full sm:px-3">
 	<button
-		class="btn btn-accent text-left w-full"
+		class="btn btn-accent dark:shadow-none text-left w-full rounded-none sm:rounded-box"
 		style="--btn-noise: 0"
 		onclick={() => (showMenu = true)}
 	>
@@ -74,6 +74,12 @@
 
 			<div class="relative w-full sm:w-1/2 flex flex-col bg-base-200">
 				<ul class="menu w-full z-10">
+					<li>
+						<a href="/profile">
+							<User size={14} />
+							Profile</a
+						>
+					</li>
 					<li>
 						<a href="/settings">
 							<Settings2 size={14} />

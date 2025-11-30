@@ -23,7 +23,6 @@
 				<div class="card-title text-3xl">Let's go</div>
 				<p>Jump in and explore the possibilities...</p>
 			</div>
-
 			<div class="my-6 space-y-4 tooltip tooltip-bottom" data-tip="Coming soon...">
 				<button class="btn btn-block opacity-50" disabled
 					><img src="/img/google.svg" alt="Google Logo" class="inline-block w-5" /> Continue with Google</button

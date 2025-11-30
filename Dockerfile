@@ -9,12 +9,6 @@ LABEL fly_launch_runtime="SvelteKit"
 # SvelteKit app lives here
 WORKDIR /app
 
-ARG BETTER_AUTH_SECRET
-ARG MONGODB_URI
-ARG OPENAI_API_KEY
-ARG BASE_URL
-ARG RESEND_API_KEY
-
 # Set production environment
 ENV NODE_ENV="production"
 
@@ -33,7 +27,10 @@ RUN bun install
 # Copy application code
 COPY . .
 
-RUN BETTER_AUTH_SECRET=$BETTER_AUTH_SECRET MONGODB_URI=$MONGODB_URI OPENAI_API_KEY=$OPENAI_API_KEY BASE_URL=$BASE_URL RESEND_API_KEY=$RESEND_API_KEY bun --bun run build
+RUN TURSO_DB_URL=$TURSO_DB_URL TURSO_DB_AUTH_TOKEN=$TURSO_DB_AUTH_TOKEN pnpm run build
+
+# Build application
+RUN bun --bun run build
 
 # Remove development dependencies
 RUN rm -rf node_modules && \

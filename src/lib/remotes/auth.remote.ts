@@ -65,8 +65,34 @@ export const getSession = query(async () => {
 		},
 		headers: request.headers // pass the headers
 	});
-	console.log(session);
 	return session;
+});
+
+export const deleteConfirmation = form(async () => {
+	const { request } = getRequestEvent();
+
+	try {
+		const {
+			session: { token }
+		} = await auth.api.getSession({
+			query: {
+				disableCookieCache: true
+			},
+			headers: request.headers // pass the headers
+		});
+
+		console.log('token');
+		console.log(token);
+
+		await auth.api.deleteUser({
+			body: {},
+			headers: request.headers
+		});
+		return { success: true };
+	} catch (error) {
+		console.log(error);
+		return { success: false };
+	}
 });
 
 export const logout = form(async () => {

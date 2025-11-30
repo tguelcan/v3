@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Mailbox } from '@lucide/svelte';
-	import { invalidateAll } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 
 	// Remotes
@@ -9,6 +7,7 @@
 	// Components
 	import Claim from './Claim.svelte';
 	import Legal from './Legal.svelte';
+	import CheckYourEmails from '$components/CheckYourMails.svelte';
 
 	const { email } = authForm.fields;
 	let success = $derived<boolean | null>(authForm?.result?.success);
@@ -38,11 +37,7 @@
 			<div class="divider">OR</div>
 
 			{#if success}
-				<div in:fade class="flex flex-col items-center">
-					<Mailbox />
-					<p class="text-center">Check your emails.</p>
-					<button class="btn btn-link" onclick={() => (success = null)}>Back</button>
-				</div>
+				<CheckYourEmails bind:success showBack />
 			{:else}
 				<form in:fade {...authForm} class="space-y-6">
 					<!-- form content goes here -->

@@ -81,9 +81,6 @@ export const deleteConfirmation = form(async () => {
 			headers: request.headers // pass the headers
 		});
 
-		console.log('token');
-		console.log(token);
-
 		await auth.api.deleteUser({
 			body: {},
 			headers: request.headers

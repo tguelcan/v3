@@ -20,7 +20,7 @@
 
 <dialog id="delete_modal" class="modal modal-bottom sm:modal-middle" class:modal-open={showModal}>
 	<div class="modal-box">
-		<h3 class="text-lg font-bold">Delete your Profile</h3>
+		<h3 class="card-title">Delete your Profile</h3>
 		<p class="py-4">
 			Please confirm that you really want to start the process of deleting your profile.
 			{#if success}

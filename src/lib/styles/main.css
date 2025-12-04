@@ -2,7 +2,9 @@
 @import '@fontsource-variable/karla/index.css';
 
 @import 'tailwindcss';
+@import './_typography.css';
 @plugin '@tailwindcss/typography';
+@plugin 'tailwindcss-motion';
 
 @plugin "daisyui" {
 	themes:
@@ -99,6 +101,10 @@
 	--tw-prose-pre-code: var(--color-base-content);
 
 	code {
-		@applay border border-base-100;
+		@apply border border-base-100;
 	}
+}
+
+.card-title {
+	@apply font-normal text-xl;
 }

@@ -55,3 +55,13 @@ export const auth = betterAuth({
 		client
 	})
 });
+
+export const getUser = async ({ headers }) => {
+	const { user } = await auth.api.getSession({
+		query: {
+			disableCookieCache: true
+		},
+		headers
+	});
+	return user;
+};
